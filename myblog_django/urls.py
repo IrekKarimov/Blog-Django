@@ -17,9 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
 from blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.MainView.as_view()),
+    path("post/", views.PostDetail.as_view()),
+    path("contact/", views.ContactForm.as_view()),
+    #path("", blog.views.index),
 ]
