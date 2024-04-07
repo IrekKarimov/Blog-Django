@@ -12,16 +12,26 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <a class="nav-link active" aria-current="page" href="#">Главная</a>
-                      <a class="nav-link" href="#">Контакты</a>
+                      <a class="nav-link active" aria-current="page" href="{% url "index" %}">Главная</a>
+                      <a class="nav-link" href="{% url "contact" %}">Контакты</a>
                   </div>
                   <form class="d-flex" role="search">
                       <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
                       <button class="btn btn-outline-success me-2" type="submit">Найти</button>
-                      <button type="button" class="btn btn-outline-light me-2">Вход</button>
-                      <button type="button" class="btn btn-outline-light me-2">Регистрация</button>
-                      <button type="button" class="btn btn-outline-light">Выход</button>
                   </form>
+                      {% if not user.is_authenticated %}
+                          <a type="button" class="btn btn-outline-light me-2" href="{% url "login" %}">Вход</a>
+                          <a type="button" class="btn btn-outline-light me-2" href="{% url "registration" %}">Регистрация</a>
+                      {% endif %}
+                      {% if user.is_admin %}
+                          <a type="button" class="btn btn-outline-light me-2" href="{% url "admin:index" %}">Админ панель</a>
+                      {% endif %}
+                      {% if user.is_authenticated %}
+                          <a type="button" class="btn btn-outline-light me-2" href="{% url "profile" %}">Профайл</a>
+                          <a type="button" class="btn btn-outline-light" href="{% url "logout" %}">Выход</a>
+                      {% endif %}
+
+
             </div>
           </div>
       </nav>
